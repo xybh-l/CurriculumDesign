@@ -4,6 +4,7 @@
 {
 }*/
 
+extern Student S[100];
 void Student::add(Teacher t)
 {
 	int x = 26, y = 8;
@@ -12,6 +13,22 @@ void Student::add(Teacher t)
 	gotoxy(x, y);
 	cout << "请输入学生学号:";
 	cin >> this->id;
+	for (int i = 0; i < StudentNumber; i++)
+	{
+		if (id == S[i].id)
+		{
+			gotoxy(x, y+2);
+			cout << "学号存在重复,请重新输入! ";
+			system("pause");
+			gotoxy(x, y + 2);
+			cout << "                                            ";
+			gotoxy(x, y);
+			cout << "                                  ";
+			gotoxy(x, y);
+			cout << "请输入学生学号:";
+			cin >> this->id;
+		}
+	}
 	gotoxy(x, y+3);
 	cout << "请输入学生姓名:";
 	cin >> this->name;

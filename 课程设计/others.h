@@ -12,6 +12,7 @@ using namespace std;
 void gotoxy(int, int); 
 void draw();
 void WriteStudentInfo();
+void WriteImport();
 
 #endif // !OTHERS_H_
 

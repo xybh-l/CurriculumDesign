@@ -6,6 +6,7 @@
 #include<fstream>
 using namespace std;
 
+extern int StudentNumber;
 class Student
 {
 private:

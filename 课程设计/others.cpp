@@ -43,8 +43,14 @@ void WriteStudentInfo()
 	ofstream out(filename, ios::out);
 	for (int i = 0; i < StudentNumber; i++)
 	{
-		out << S[i].id << ends << S[i].name << ends << S[i].classid << ends << S[i].chinese << ends << S[i].math << ends << S[i].english << ends << S[i].sum << ends <<S[i].aver << endl;
+		out << S[i].id << " " << S[i].name << " " << S[i].classid << " " << S[i].chinese << " " << S[i].math << " " << S[i].english << " " << S[i].sum << " " <<S[i].aver << "\n";
 	}
 	out.close();
+}
+
+void WriteImport()
+{
+	ofstream out("import.txt", ios::out);
+	out << TeacherNumber << " " << StudentNumber;
 }
 
