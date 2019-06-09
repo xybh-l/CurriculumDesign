@@ -26,5 +26,6 @@ public:
 		return in;
 	}
 	friend void QueryStudentInfo(int id);
+	friend void DeleteStudentInfo(int id);
 	friend void WriteStudentInfo();
 };

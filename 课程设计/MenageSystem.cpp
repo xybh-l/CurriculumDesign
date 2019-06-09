@@ -31,6 +31,8 @@ void TeacherSystem(int id) {
 
 	switch (choice)
 	{
+	case 0:
+		exit(0);
 	case 1:
 		gotoxy(x - 15, y + 26);
 		cout << "请输入添加学生的人数:";
@@ -46,7 +48,7 @@ void TeacherSystem(int id) {
 		//ModifyStudentInfo();
 		break;
 	case 4:
-		//DeleteStudentInfo();
+		DeleteStudentInfo(id);
 		break;
 
 	default:
@@ -58,6 +60,10 @@ void TeacherSystem(int id) {
 }
 void AddStudentInfo(int id, int num)
 {
+	if (num <= 0)
+	{
+		TeacherSystem(id);
+	}
 	system("cls");
 	draw();
 	for (int i = StudentNumber; i < StudentNumber+num; i++)
@@ -75,7 +81,8 @@ void AddStudentInfo(int id, int num)
 void QueryStudentInfo(int id)
 {
 	int choice;
-	int i;
+	int i, find = 0;
+	int n = 0;
 	string tid;
 	string tname;
 	system("cls");
@@ -150,6 +157,64 @@ void QueryStudentInfo(int id)
 				TeacherSystem(id);
 			}
 		case 2:
+			gotoxy(x, y + 14);
+			cout << "请输入你要查询的姓名:";
+			cin >> tname;
+			system("cls");
+			draw();
+			for (i = 0; i < StudentNumber; i++)
+			{
+				if (tname == S[i].name)
+				{
+					gotoxy(x - 4, y);
+					cout << "学号";
+					gotoxy(x + 10, y);
+					cout << "姓名";
+					gotoxy(x + 18, y);
+					cout << "语文";
+					gotoxy(x + 24, y);
+					cout << "数学";
+					gotoxy(x + 30, y);
+					cout << "英语";
+					gotoxy(x + 36, y);
+					cout << "总分";
+					gotoxy(x + 42, y);
+					cout << "平均分";
+					gotoxy(x - 4, y + 1 + n);
+					cout << S[i].id;
+					gotoxy(x + 10, y + 1 + n);
+					cout << S[i].name;
+					gotoxy(x + 18, y + 1 + n);
+					cout << S[i].chinese;
+					gotoxy(x + 24, y + 1 + n);
+					cout << S[i].math;
+					gotoxy(x + 30, y + 1 + n);
+					cout << S[i].english;
+					gotoxy(x + 36, y + 1 + n);
+					cout << S[i].sum;
+					gotoxy(x + 42, y + 1 + n);
+					cout << S[i].aver;
+					n++;
+					find = 1;
+				}
+			}
+			if (find == 0)
+			{
+				system("cls");
+				draw();
+				gotoxy(x + 18, y);
+				cout << "无该学号信息!";
+				gotoxy(x + 28, y + 1);
+				system("pause");
+				TeacherSystem(id);
+			}
+			else
+			{
+				find = 0;
+				gotoxy(x, y + 1 + i);
+				system("pause");
+				TeacherSystem(id);
+			}
 			break;
 		case 3:
 			system("cls");
@@ -195,6 +260,42 @@ void QueryStudentInfo(int id)
 		system("pause");
 		QueryStudentInfo(id);
 	}
+}
+void DeleteStudentInfo(int id)
+{
+	string tid;
+	int find = 0;
+	int i = 0;
+	int x = 45, y = 6;
+	gotoxy(x - 15, y + 26);
+	cout << "请输入要删除的学生学号:";
+	cin >> tid;
+	for (i = 0; i < StudentNumber; i++)
+	{
+		if (tid == S[i].id)
+		{
+			for (int deleteid = i;  deleteid < StudentNumber-1; deleteid++)
+			{
+				swap(S[deleteid + 1], S[deleteid]);
+			}
+			gotoxy(x - 15, y + 28);
+			StudentNumber--;
+			cout << "删除成功!";
+			find = 1;
+			break;
+		}
+	}
+	if (find == 0)
+	{
+		gotoxy(x - 15, y + 28);
+		cout << "没有查询到该学号,请核对后,再进行操作。";
+	}
+	gotoxy(x - 10, y + 30);
+	system("pause");
+	WriteStudentInfo();
+	WriteImport();
+	TeacherSystem(id);
+	
 }
 //功能: 检查登录者权限,选择进入相应的系统
 void CheckPermission(int id) {
