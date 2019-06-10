@@ -36,6 +36,8 @@ void Menu()
 	Checkpwd(choice);
 }
 
+
+
 //功能: 读取教师信息
 void ReadTeacherFile()
 {

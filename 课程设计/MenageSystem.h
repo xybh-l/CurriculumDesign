@@ -10,9 +10,10 @@ using std::cin;
 
 void AddStudentInfo(int id, int num);
 void QueryStudentInfo(int id);
-//void ModifyStudentInfo();
+void ModifyStudentInfo(int id);
 void DeleteStudentInfo(int id);
 void CheckPermission(int n);
+void WirteTeacherFIle();
 
 
 #endif // !MENAGESYSTEM_H_

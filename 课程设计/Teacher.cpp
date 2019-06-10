@@ -1,4 +1,5 @@
 #include "Teacher.h"
+#include "others.h"
 
 void Teacher::SetInfo(long m_id, string m_password, string m_name, int m_classid)
 {
@@ -16,4 +17,13 @@ void Teacher::Show()
 int Teacher::get_classid()
 {
 	return classid;
+}
+
+void Teacher::ModifyPwd()
+{
+	cout << "请输入你要修改的密码:";
+	cin >> password;
+	gotoxy(30, 32);
+	cout << "修改成功! ";
+	system("pause");
 }

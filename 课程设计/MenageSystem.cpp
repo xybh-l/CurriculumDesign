@@ -2,9 +2,10 @@
 #include "MenageSystem.h"
 #include "others.h"
 
-Teacher T[100];
+extern Teacher T[100];
 extern Student S[100];
 extern int StudentNumber;
+extern int TeacherNumber;
 void TeacherSystem(int id) {
 	int num;
 	int x = 45, y = 6;
@@ -12,18 +13,20 @@ void TeacherSystem(int id) {
 	system("cls");
 	draw();
 	gotoxy(x, y);
-	cout << "后台管理系统" << endl;
+	cout << "后台管理系统";
 	gotoxy(x + 6, y + 1);
-	cout << "欢迎你," << T[id].name << "老师!" << endl;
+	cout << "欢迎你," << T[id].name << "老师!";
 	gotoxy(x - 5, y + 5);
-	cout << "1.添加本班学生成绩信息" << endl;
+	cout << "1.添加本班学生成绩信息";
 	gotoxy(x - 5, y + 8);
-	cout << "2.查询本班学生成绩信息" << endl;
+	cout << "2.查询本班学生成绩信息";
 	gotoxy(x - 5, y + 11);
-	cout << "3.修改本班学生成绩信息" << endl;
+	cout << "3.修改本班学生成绩信息";
 	gotoxy(x - 5, y + 14);
-	cout << "4.删除本班学生成绩信息" << endl;
+	cout << "4.删除本班学生成绩信息";
 	gotoxy(x - 5, y + 17);
+	cout << "5.修改密码";
+	gotoxy(x - 5, y + 20);
 	cout << "0.退出" << endl;
 	gotoxy(x - 15, y + 24);
 	cout << "请输入你的选择:";
@@ -45,12 +48,16 @@ void TeacherSystem(int id) {
 		QueryStudentInfo(id);
 		break;
 	case 3:
-		//ModifyStudentInfo();
+		ModifyStudentInfo(id);
 		break;
 	case 4:
 		DeleteStudentInfo(id);
 		break;
-
+	case 5:
+		gotoxy(x - 15, y + 25);
+		T[id].ModifyPwd();
+		WirteTeacherFIle();
+		TeacherSystem(id);
 	default:
 		gotoxy(x - 15, y + 26);
 		cout << "无该选项,请重新选择! ";
@@ -261,6 +268,36 @@ void QueryStudentInfo(int id)
 		QueryStudentInfo(id);
 	}
 }
+void ModifyStudentInfo(int id)
+{
+	string tid;
+	int find = 0;
+	int i = 0;
+	int x = 45, y = 6;
+	gotoxy(x - 15, y + 26);
+	cout << "请输入要修改的学生学号:";
+	cin >> tid;
+	for (i = 0; i < StudentNumber; i++)
+	{
+		if (tid == S[i].id&&S[i].classid == T[id].get_classid())
+		{
+			S[i].add(T[id]);
+			cout << "修改成功!";
+			find = 1;
+			break;
+		}
+	}
+	if (find == 0)
+	{
+		gotoxy(x - 15, y + 28);
+		cout << "没有查询到该学号,请核对后,再进行操作。";
+	}
+	gotoxy(x - 10, y + 30);
+	system("pause");
+	WriteStudentInfo();
+	WriteImport();
+	TeacherSystem(id);
+}
 void DeleteStudentInfo(int id)
 {
 	string tid;
@@ -272,7 +309,7 @@ void DeleteStudentInfo(int id)
 	cin >> tid;
 	for (i = 0; i < StudentNumber; i++)
 	{
-		if (tid == S[i].id)
+		if (tid == S[i].id&&S[i].classid==T[id].get_classid())
 		{
 			for (int deleteid = i;  deleteid < StudentNumber-1; deleteid++)
 			{
@@ -311,4 +348,13 @@ void CheckPermission(int id) {
 	}
 	
 		
+}
+
+void WirteTeacherFIle()
+{
+	ofstream out("TeacherInfo.txt");
+	for (int i = 0; i < TeacherNumber; i++)
+	{
+		out << T[i].id << " " << T[i].password << " " << T[i].name << " " << T[i].classid << "\n";
+	}
 }

@@ -11,6 +11,7 @@ using std::ios;
 
 int TeacherNumber, StudentNumber;
 Student S[100];
+Teacher T[100];
 void gotoxy(int, int); void gotoxy(int x, int y)
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
@@ -52,5 +53,5 @@ void WriteImport()
 {
 	ofstream out("import.txt", ios::out);
 	out << TeacherNumber << " " << StudentNumber;
+	out.close();
 }
-
