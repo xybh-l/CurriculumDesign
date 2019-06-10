@@ -8,6 +8,7 @@
 #include"Global.h"
 using std::cout;
 using std::cin;
+using std::sort;
 
 void AddStudentInfo(int id, int num);
 void QueryStudentInfo(int id);

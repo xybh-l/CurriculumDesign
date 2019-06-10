@@ -70,7 +70,3 @@ void WriteImport()
 	out.close();
 }
 
-bool cmp(Student & A, Student & B)
-{
-	return A.get_sum() > B.get_sum();
-}

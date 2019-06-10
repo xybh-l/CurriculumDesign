@@ -6,6 +6,12 @@ extern Teacher T[100];
 extern Student S[100];
 extern int StudentNumber;
 extern int TeacherNumber;
+
+/*bool cmp(Student& A, Student& B)
+{
+	return A.get_sum() > B.get_sum();
+}*/
+
 void TeacherSystem(int id) {
 	int num;
 	int x = 45, y = 6;
@@ -79,12 +85,16 @@ void AddStudentInfo(int id, int num)
 	}
 	gotoxy(26, 25);
 	StudentNumber+=num;
-	sort(S[0], S[StudentNumber],cmp);
+	sort(S, S+StudentNumber);
 	WriteStudentInfo();
 	WriteImport();
 	cout << "Â¼Èë³É¹¦!";
 	system("pause");
 
+}
+bool operator<(Student& l, Student& r)
+{
+	return l.sum > r.sum;
 }
 void QueryStudentInfo(int id)
 {
@@ -359,3 +369,4 @@ void WirteTeacherFIle()
 		out << T[i].id << " " << T[i].password << " " << T[i].name << " " << T[i].classid << "\n";
 	}
 }
+

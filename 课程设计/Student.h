@@ -26,11 +26,12 @@ public:
 		in >> S.id >> S.name >> S.pwd >> S.classid >> S.chinese >> S.math >> S.english >> S.sum >> S.aver;
 		return in;
 	}
+	friend bool operator <(Student& l, Student& r);
 	friend void QueryStudentInfo(int id);
 	friend void DeleteStudentInfo(int id);
 	friend void ModifyStudentInfo(int id);
 	friend void QueryGrade(int id);
-	friend bool cmp(Student &A, Student &B);
+	//friend bool cmp(Student &A, Student &B);
 	friend void StudentSystem();
 	friend void WriteStudentInfo();
 };
