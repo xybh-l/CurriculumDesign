@@ -46,3 +46,8 @@ void Student::add(Teacher t)
 	this->aver = this->sum / 3;
 	gotoxy(x, y + 15);
 }
+
+double Student::get_sum()
+{
+	return sum;
+}

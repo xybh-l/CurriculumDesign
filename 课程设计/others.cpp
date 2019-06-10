@@ -29,7 +29,7 @@ void draw()
 	char x = 20, y = 3;
 	gotoxy(x, y); 
 	cout << "***************************************************************"<<endl;
-	for (i=1; i < 30; i++)
+	for (i=1; i < 34; i++)
 	{
 		gotoxy(x, y+i);
 		cout << "*                                                             *"<<endl;
@@ -44,9 +44,23 @@ void WriteStudentInfo()
 	ofstream out(filename, ios::out);
 	for (int i = 0; i < StudentNumber; i++)
 	{
-		out << S[i].id << " " << S[i].name << " " << S[i].classid << " " << S[i].chinese << " " << S[i].math << " " << S[i].english << " " << S[i].sum << " " <<S[i].aver << "\n";
+		out << S[i].id << " " << S[i].name << " " << S[i].pwd << " " << S[i].classid << " " << S[i].chinese << " " << S[i].math << " " << S[i].english << " " << S[i].sum << " " <<S[i].aver << "\n";
 	}
 	out.close();
+}
+
+void ReadImport()
+{
+	const char * filename = "import.txt";
+	FILE * read = fopen(filename, "r");
+	if (read == NULL)
+	{
+		fopen(filename, "w");
+		TeacherNumber = StudentNumber = 0;
+	}
+	else
+		fscanf(read, "%d %d", &TeacherNumber, &StudentNumber);
+	cout << TeacherNumber << ends << StudentNumber << endl;
 }
 
 void WriteImport()
@@ -54,4 +68,9 @@ void WriteImport()
 	ofstream out("import.txt", ios::out);
 	out << TeacherNumber << " " << StudentNumber;
 	out.close();
+}
+
+bool cmp(Student & A, Student & B)
+{
+	return A.get_sum() > B.get_sum();
 }

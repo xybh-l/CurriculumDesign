@@ -12,6 +12,7 @@ class Student
 private:
 	string id;
 	string name;
+	string pwd = "123456";
 	int classid;
 	double chinese;
 	double math;
@@ -19,14 +20,17 @@ private:
 	double sum;//总成绩
 	double aver;//平均成绩
 public:
-	//void Show();
 	void add(Teacher t);
+	double get_sum();
 	friend ifstream & operator >>(ifstream & in, Student & S) {
-		in >> S.id >> S.name >> S.classid >> S.chinese >> S.math >> S.english >> S.sum >> S.aver;
+		in >> S.id >> S.name >> S.pwd >> S.classid >> S.chinese >> S.math >> S.english >> S.sum >> S.aver;
 		return in;
 	}
 	friend void QueryStudentInfo(int id);
 	friend void DeleteStudentInfo(int id);
 	friend void ModifyStudentInfo(int id);
+	friend void QueryGrade(int id);
+	friend bool cmp(Student &A, Student &B);
+	friend void StudentSystem();
 	friend void WriteStudentInfo();
 };

@@ -120,6 +120,7 @@
     <ClCompile Include="MenageSystem.cpp" />
     <ClCompile Include="others.cpp" />
     <ClCompile Include="Student.cpp" />
+    <ClCompile Include="StudentSystem.cpp" />
     <ClCompile Include="Teacher.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +129,7 @@
     <ClInclude Include="MenageSystem.h" />
     <ClInclude Include="others.h" />
     <ClInclude Include="Student.h" />
+    <ClInclude Include="StudentSystem.h" />
     <ClInclude Include="Teacher.h" />
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@
 
 #include<iostream>
 #include<vector>
+#include"Student.h"
 #include"Global.h"
 using std::cout;
 using std::cin;

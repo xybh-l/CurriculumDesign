@@ -79,6 +79,7 @@ void AddStudentInfo(int id, int num)
 	}
 	gotoxy(26, 25);
 	StudentNumber+=num;
+	sort(S[0], S[StudentNumber],cmp);
 	WriteStudentInfo();
 	WriteImport();
 	cout << "Â¼Èë³É¹¦!";

@@ -86,4 +86,8 @@ void Checkpwd(int choice)
 	{
 		ReadTeacherFile();
 	}
+	if (choice == 2)
+	{
+		StudentSystem();
+	}
 }
