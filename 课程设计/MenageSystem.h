@@ -12,14 +12,15 @@ using std::cin;
 using std::sort;
 
 void ROOT();
+void QueryStudentInfo();
+void ModifyStudentInfo();
 void AddStudentInfo(int id, int num);
 void AddStudentInfo(int num);
 void QueryStudentInfo(int id);
-void QueryStudentInfo();
 void ModifyStudentInfo(int id);
 void DeleteStudentInfo(int id);
 void CheckPermission(int n);
-void WirteTeacherFIle();
+void WirteTeacherInfo();
 
 
 #endif // !MENAGESYSTEM_H_

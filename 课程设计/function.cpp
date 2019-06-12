@@ -94,8 +94,17 @@ void Checkpwd(int choice)
 	{
 		ReadTeacherFile();
 	}
-	if (choice == 2)
+	else if (choice == 2)
 	{
 		StudentSystem();
+	}
+	else {
+		gotoxy(35, 20);
+		cin.clear();
+		cin.ignore(1024, '\n');
+		//cin.sync();
+		cout << "ÎÞÐ§ÊäÈë! ";
+		system("pause");
+		Menu();
 	}
 }

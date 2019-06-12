@@ -1,6 +1,7 @@
 #pragma once
 
 #include"MenageSystem.h"
+#include"Teacher.h"
 #include"others.h"
 #include<iostream>
 

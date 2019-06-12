@@ -18,11 +18,12 @@ public:
 	void Show();
 	int get_classid();
 	void ModifyPwd();
-	friend void WirteTeacherFIle();
+	friend void WirteTeacherInfo();
 	friend void ReadTeacherFile();
 	friend void CheckPermission(int id);
 	friend void TeacherSystem(int id);
 	friend void QueryTeacherInfo();
+	friend void DeleteTeacherInfo();
 private:
 	long id;
 	string password;

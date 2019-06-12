@@ -2,6 +2,7 @@
 
 extern Student S[100];
 
+//功能: 学生系统登录界面,进行登录验证
 void StudentSystem()
 {
 	int x = 30;
@@ -47,11 +48,11 @@ void StudentSystem()
 	}
 }
 
+//功能: 学生系统功能选择
 void StudentChoice(int id)
 {
 	int x = 30;
 	int y = 10;
-	string newpassword;
 	int choice;
 	int i;
 	system("cls");
@@ -79,18 +80,18 @@ void StudentChoice(int id)
 		system("pause");
 		StudentChoice(id);
 	}
-	if (choice == 2)
+	else if (choice == 2)
 	{
-		gotoxy(35, 18);
-		cout << "请输入新的密码:              ";
-		gotoxy(50, 18);
-		cin >> newpassword;
-		S[id].set_password(newpassword);
-		WriteStudentInfo();
+		SetNewPassword(id);
+	}
+	else if (choice == 0)
+		exit(0);
+	else
+	{
+		cin.clear();
+		cin.ignore(1024, '\n');
 		StudentChoice(id);
 	}
-	if (choice == 0)
-		exit(0);
 }
 
 void QueryGrade(int id)
@@ -117,4 +118,15 @@ void QueryGrade(int id)
 	gotoxy(x, y + 33);
 	cout << "年排:" << S[id].schoolrank;
 	gotoxy(x+10, y + 33);
+}
+
+void SetNewPassword(int id) {
+	string newpassword;
+	gotoxy(35, 18);
+	cout << "请输入新的密码:              ";
+	gotoxy(50, 18);
+	cin >> newpassword;
+	S[id].set_password(newpassword);
+	WriteStudentInfo();
+	StudentChoice(id);
 }

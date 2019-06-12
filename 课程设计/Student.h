@@ -27,6 +27,11 @@ public:
 	string get_id();
 	double get_sum();
 	int get_classid();
+	void set_id(string id);
+	void set_name(string name);
+	void set_chinese(double c);
+	void set_math(double m);
+	void set_english(double e);
 	void set_schoolrank(int i);
 	void set_classrank(int i);
 	void set_password(string newpwd);
@@ -40,6 +45,7 @@ public:
 	friend void QueryStudentInfo(int id);
 	friend void QueryStudentInfo();
 	friend void DeleteStudentInfo(int id);
+	friend void ModifyStudentInfo();
 	friend void ModifyStudentInfo(int id);
 	friend void QueryGrade(int id);
 	friend void StudentSystem();

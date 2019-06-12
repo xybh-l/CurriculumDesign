@@ -1,5 +1,6 @@
 #include "RootSystem.h"
 
+//功能: 添加教师信息
 void AddTeacherInfo(int num)
 {
 
@@ -30,13 +31,14 @@ void AddTeacherInfo(int num)
 	}
 	gotoxy(26, 25);
 	TeacherNumber += num;
-	WirteTeacherFIle();
+	WirteTeacherInfo();
 	WriteImport();
 	cout << "录入成功!";
 	system("pause");
 	ROOT();
 }
 
+//功能: 查询教师信息
 void QueryTeacherInfo()
 {
 	system("cls");
@@ -64,7 +66,39 @@ void QueryTeacherInfo()
 	ROOT();
 }
 
+//功能: 删除教师信息
 void DeleteTeacherInfo()
 {
-
+	long tid;
+	int find = 0;
+	int i = 0;
+	int x = 45, y = 6;
+	gotoxy(x - 15, y + 26);
+	cout << "请输入要删除的教师工号:";
+	cin >> tid;
+	for (i = 0; i < TeacherNumber; i++)
+	{
+		if (tid == T[i].id)
+		{
+			for (int deleteid = i; deleteid < TeacherNumber - 1; deleteid++)
+			{
+				swap(T[deleteid + 1], T[deleteid]);
+			}
+			gotoxy(x - 15, y + 28);
+			TeacherNumber--;
+			cout << "删除成功!";
+			find = 1;
+			break;
+		}
+	}
+	if (find == 0)
+	{
+		gotoxy(x - 15, y + 28);
+		cout << "没有查询到该工号,请核对后,再进行操作。";
+	}
+	gotoxy(x - 10, y + 30);
+	system("pause");
+	WirteTeacherInfo();
+	WriteImport();
+	ROOT();
 }
