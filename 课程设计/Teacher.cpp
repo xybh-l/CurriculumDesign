@@ -1,7 +1,7 @@
 #include "Teacher.h"
 #include "others.h"
 
-void Teacher::SetInfo(long m_id, string m_password, string m_name, int m_classid)
+void Teacher::SetInfo(long m_id, string m_name, int m_classid, string m_password)
 {
 	id = m_id;
 	password = m_password;

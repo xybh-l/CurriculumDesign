@@ -8,6 +8,7 @@ using std::endl;
 using std::ifstream;
 using std::ofstream;
 using std::ios;
+using std::vector;
 
 int TeacherNumber, StudentNumber;
 Student S[100];
@@ -28,14 +29,14 @@ void draw()
 	static int i = 0;
 	char x = 20, y = 3;
 	gotoxy(x, y); 
-	cout << "***************************************************************"<<endl;
+	cout << "***********************************************************************"<<endl;
 	for (i=1; i < 34; i++)
 	{
 		gotoxy(x, y+i);
-		cout << "*                                                             *"<<endl;
+		cout << "*                                                                     *"<<endl;
 	}
 	gotoxy(x, y+i);
-	cout << "***************************************************************"<<endl;
+	cout << "***********************************************************************"<<endl;
 }
 
 void WriteStudentInfo()
@@ -44,7 +45,7 @@ void WriteStudentInfo()
 	ofstream out(filename, ios::out);
 	for (int i = 0; i < StudentNumber; i++)
 	{
-		out << S[i].id << " " << S[i].name << " " << S[i].pwd << " " << S[i].classid << " " << S[i].chinese << " " << S[i].math << " " << S[i].english << " " << S[i].sum << " " <<S[i].aver << "\n";
+		out << S[i].id << " " << S[i].name << " " << S[i].pwd << " " << S[i].classid << " " << S[i].chinese << " " << S[i].math << " " << S[i].english << " " << S[i].sum << " " <<S[i].aver << " " << S[i].classrank << " " << S[i].schoolrank << "\n";
 	}
 	out.close();
 }
@@ -69,4 +70,44 @@ void WriteImport()
 	out << TeacherNumber << " " << StudentNumber;
 	out.close();
 }
+
+void SortRank()
+{
+	sort(S, S + StudentNumber);
+	for (int i = 0; i < StudentNumber; i++)
+	{
+		S[i].set_schoolrank(i + 1);
+	}
+}
+
+bool emp(Student &A, Student &B) {
+	return A.get_sum() > B.get_sum();
+}
+
+void SortRank(int id)
+{
+	
+	vector<Student> ClassStudent;
+	for (int i = 0; i < StudentNumber; i++)
+	{
+		if (S[i].get_classid() == T[id].get_classid())
+		{
+			ClassStudent.push_back(S[i]);
+		}
+	}
+	sort(ClassStudent.begin(), ClassStudent.end(),emp);
+	for (int i = 0; i < ClassStudent.size(); i++)
+	{
+		ClassStudent[i].set_classrank(i+1);
+	}
+	for (int i = 0; i < StudentNumber; i++)
+	{
+		for (int j = 0; j < ClassStudent.size(); j++)
+		{
+			if (S[i].get_id() == ClassStudent[j].get_id())
+				S[i].set_classrank(ClassStudent[j].get_classrank());
+		}
+	}
+}
+
 

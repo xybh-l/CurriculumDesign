@@ -56,25 +56,33 @@ void ReadTeacherFile()
 			in >> T[i].id >> T[i].password >> T[i].name >> T[i].classid;
 			T[i].Show();
 		}
+		in.close();
 		cout << "ÇëÊäÈë½ÌÊ¦¹¤ºÅ:";
 		cin >> t_id;
 		cout << "ÇëÊäÈëµÇÂ¼ÃÜÂë:";
 		cin >> t_password;
-		for (int i = 0; i < 50; i++)
+		if (t_id == 0)
 		{
-			if (t_id == T[i].id)
-			{
-				if (t_password == T[i].password)
-				{
-					cout << "µÇÂ¼³É¹¦!" << endl;
-					CheckPermission(i);
-				}
-				else
-					break;
-			}
+			if (t_password == "admin")
+				CheckPermission(-1);
 		}
-		//cout << "¹¤ºÅ»òÃÜÂë´íÎó!" << endl;
-		//system("pause");
+		else {
+				for (int i = 0; i < 50; i++)
+				{
+					if (t_id == T[i].id)
+					{
+						if (t_password == T[i].password)
+						{
+							cout << "µÇÂ¼³É¹¦!" << endl;
+							CheckPermission(i);
+						}
+						else
+							break;
+					}
+				}
+		}
+		cout << "¹¤ºÅ»òÃÜÂë´íÎó!" << endl;
+		system("pause");
 		Menu();
 	}
 }

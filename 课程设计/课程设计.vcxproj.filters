@@ -36,6 +36,9 @@
     <ClCompile Include="StudentSystem.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="RootSystem.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="others.h">
@@ -57,6 +60,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="StudentSystem.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RootSystem.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

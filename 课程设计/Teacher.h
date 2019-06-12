@@ -14,7 +14,7 @@ using std::ofstream;
 class Teacher
 {
 public:
-	void SetInfo(long m_id, string m_password, string m_name, int m_classid);
+	void SetInfo(long m_id, string m_name, int m_classid, string m_password = "111111");
 	void Show();
 	int get_classid();
 	void ModifyPwd();
@@ -22,6 +22,7 @@ public:
 	friend void ReadTeacherFile();
 	friend void CheckPermission(int id);
 	friend void TeacherSystem(int id);
+	friend void QueryTeacherInfo();
 private:
 	long id;
 	string password;

@@ -7,6 +7,7 @@
 #include<conio.h>
 #include<Windows.h>
 #include<fstream>
+#include<vector>
 #include<algorithm>
 
 using namespace std;
@@ -16,4 +17,5 @@ void draw();
 void WriteStudentInfo();
 void ReadImport();
 void WriteImport();
-
+void SortRank();
+void SortRank(int id);

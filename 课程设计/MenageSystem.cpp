@@ -1,16 +1,12 @@
 #pragma once
 #include "MenageSystem.h"
+#include "RootSystem.h"
 #include "others.h"
 
 extern Teacher T[100];
 extern Student S[100];
 extern int StudentNumber;
 extern int TeacherNumber;
-
-/*bool cmp(Student& A, Student& B)
-{
-	return A.get_sum() > B.get_sum();
-}*/
 
 void TeacherSystem(int id) {
 	int num;
@@ -49,10 +45,8 @@ void TeacherSystem(int id) {
 		AddStudentInfo(id,num);
 		system("cls");
 		TeacherSystem(id);
-		break;
 	case 2:
 		QueryStudentInfo(id);
-		break;
 	case 3:
 		ModifyStudentInfo(id);
 		break;
@@ -71,6 +65,60 @@ void TeacherSystem(int id) {
 		TeacherSystem(id);
 	}
 }
+void ROOT()
+{
+	int x = 45, y = 6;
+	int choice;
+	system("cls");
+	draw();
+	gotoxy(x, y);
+	cout << "后台管理系统";
+	gotoxy(x + 6, y + 1);
+	cout << "欢迎你,管理员";
+	gotoxy(x - 5, y + 5);
+	cout << "1.添加学生成绩信息";
+	gotoxy(x + 16, y + 5);
+	cout << "5.添加教师信息";
+	gotoxy(x - 5, y + 8);
+	cout << "2.查询学生成绩信息";
+	gotoxy(x + 16, y + 8);
+	cout << "6.查询教师信息";
+	gotoxy(x - 5, y + 11);
+	cout << "3.修改学生成绩信息";
+	gotoxy(x + 16, y + 11);
+	cout << "7.修改教师信息";
+	gotoxy(x - 5, y + 14);
+	cout << "4.删除学生成绩信息";
+	gotoxy(x + 16, y + 14);
+	cout << "8.删除教师信息";
+	gotoxy(x - 5, y + 17);
+	cout << "9.修改密码";
+	gotoxy(x + 16, y + 17);
+	cout << "0.退出" << endl;
+	gotoxy(x - 15, y + 24);
+	cout << "请输入你的选择:";
+	cin >> choice;
+	switch (choice)
+	{
+	case 1:
+		int num;
+		gotoxy(x - 15, y + 26);
+		cout << "请输入添加学生的人数:";
+		cin >> num;
+		AddStudentInfo(num);
+	case 2:
+		QueryStudentInfo();
+	case 5:
+		gotoxy(x - 15, y + 26);
+		cout << "请输入添加教师的人数:";
+		cin >> num;
+		AddTeacherInfo(num);
+		system("cls");
+		ROOT();
+	default:
+		break;
+	}
+}
 void AddStudentInfo(int id, int num)
 {
 	if (num <= 0)
@@ -85,12 +133,35 @@ void AddStudentInfo(int id, int num)
 	}
 	gotoxy(26, 25);
 	StudentNumber+=num;
-	sort(S, S+StudentNumber);
+	SortRank();
+	SortRank(id);
 	WriteStudentInfo();
 	WriteImport();
 	cout << "录入成功!";
 	system("pause");
 
+}
+void AddStudentInfo(int num)
+{
+
+	if (num <= 0)
+	{
+		ROOT();
+	}
+	system("cls");
+	draw();
+	for (int i = StudentNumber; i < StudentNumber + num; i++)
+	{
+		S[i].add();
+	}
+	gotoxy(26, 25);
+	StudentNumber += num;
+	SortRank();
+	WriteStudentInfo();
+	WriteImport();
+	cout << "录入成功!";
+	system("pause");
+	ROOT();
 }
 bool operator<(Student& l, Student& r)
 {
@@ -105,6 +176,8 @@ void QueryStudentInfo(int id)
 	string tname;
 	system("cls");
 	draw();
+	SortRank();
+	SortRank(id);
 	int x = 26, y = 8;
 	gotoxy(x, y);
 	cout << "1.根据学号查询学生成绩";
@@ -127,41 +200,52 @@ void QueryStudentInfo(int id)
 			cin >> tid;
 			for (i = 0; i < StudentNumber; i++)
 			{
-				if (tid == S[i].id)
+				if (T[id].get_classid() == S[i].classid)
 				{
-					system("cls");
-					draw();
-					gotoxy(x - 4, y);
-					cout << "学号";
-					gotoxy(x + 10, y);
-					cout << "姓名";
-					gotoxy(x + 18, y);
-					cout << "语文";
-					gotoxy(x + 24, y);
-					cout << "数学";
-					gotoxy(x + 30, y);
-					cout << "英语";
-					gotoxy(x + 36, y);
-					cout << "总分";
-					gotoxy(x + 42, y);
-					cout << "平均分";
-					gotoxy(x - 4, y + 1);
-					cout << S[i].id;
-					gotoxy(x + 10, y + 1);
-					cout << S[i].name;
-					gotoxy(x + 18, y + 1);
-					cout << S[i].chinese;
-					gotoxy(x + 24, y + 1);
-					cout << S[i].math;
-					gotoxy(x + 30, y + 1);
-					cout << S[i].english;
-					gotoxy(x + 36, y + 1);
-					cout << S[i].sum;
-					gotoxy(x + 42, y + 1);
-					cout << S[i].aver;
-					gotoxy(x, y + 2);
-					system("pause");
-					TeacherSystem(id);
+					if (tid == S[i].id)
+					{
+						system("cls");
+						draw();
+						gotoxy(x - 4, y);
+						cout << "学号";
+						gotoxy(x + 10, y);
+						cout << "姓名";
+						gotoxy(x + 18, y);
+						cout << "语文";
+						gotoxy(x + 24, y);
+						cout << "数学";
+						gotoxy(x + 30, y);
+						cout << "英语";
+						gotoxy(x + 36, y);
+						cout << "总分";
+						gotoxy(x + 42, y);
+						cout << "平均分";
+						gotoxy(x + 50, y);
+						cout << "班排";
+						gotoxy(x + 56, y);
+						cout << "校排";
+						gotoxy(x - 4, y + 1);
+						cout << S[i].id;
+						gotoxy(x + 10, y + 1);
+						cout << S[i].name;
+						gotoxy(x + 18, y + 1);
+						cout << S[i].chinese;
+						gotoxy(x + 24, y + 1);
+						cout << S[i].math;
+						gotoxy(x + 30, y + 1);
+						cout << S[i].english;
+						gotoxy(x + 36, y + 1);
+						cout << S[i].sum;
+						gotoxy(x + 42, y + 1);
+						cout << S[i].aver;
+						gotoxy(x + 50, y + 1);
+						cout << S[i].get_classrank();
+						gotoxy(x + 56, y + 1);
+						cout << S[i].get_schoolrank();
+						gotoxy(x, y + 2);
+						system("pause");
+						TeacherSystem(id);
+					}
 				}
 			}
 			if (i == StudentNumber)
@@ -182,38 +266,53 @@ void QueryStudentInfo(int id)
 			draw();
 			for (i = 0; i < StudentNumber; i++)
 			{
-				if (tname == S[i].name)
+				if (T[id].get_classid() == S[i].classid)
 				{
-					gotoxy(x - 4, y);
-					cout << "学号";
-					gotoxy(x + 10, y);
-					cout << "姓名";
-					gotoxy(x + 18, y);
-					cout << "语文";
-					gotoxy(x + 24, y);
-					cout << "数学";
-					gotoxy(x + 30, y);
-					cout << "英语";
-					gotoxy(x + 36, y);
-					cout << "总分";
-					gotoxy(x + 42, y);
-					cout << "平均分";
-					gotoxy(x - 4, y + 1 + n);
-					cout << S[i].id;
-					gotoxy(x + 10, y + 1 + n);
-					cout << S[i].name;
-					gotoxy(x + 18, y + 1 + n);
-					cout << S[i].chinese;
-					gotoxy(x + 24, y + 1 + n);
-					cout << S[i].math;
-					gotoxy(x + 30, y + 1 + n);
-					cout << S[i].english;
-					gotoxy(x + 36, y + 1 + n);
-					cout << S[i].sum;
-					gotoxy(x + 42, y + 1 + n);
-					cout << S[i].aver;
-					n++;
-					find = 1;
+					if (tname == S[i].name)
+					{
+						gotoxy(x - 4, y);
+						cout << "学号";
+						gotoxy(x + 10, y);
+						cout << "姓名";
+						gotoxy(x + 18, y);
+						cout << "语文";
+						gotoxy(x + 24, y);
+						cout << "数学";
+						gotoxy(x + 30, y);
+						cout << "英语";
+						gotoxy(x + 36, y);
+						cout << "总分";
+						gotoxy(x + 42, y);
+						cout << "平均分";
+						gotoxy(x + 50, y);
+						cout << "班排";
+						gotoxy(x + 56, y);
+						cout << "校排";
+						gotoxy(x - 4, y + 1 + n);
+						cout << S[i].id;
+						gotoxy(x + 10, y + 1 + n);
+						cout << S[i].name;
+						gotoxy(x + 18, y + 1 + n);
+						cout << S[i].chinese;
+						gotoxy(x + 24, y + 1 + n);
+						cout << S[i].math;
+						gotoxy(x + 30, y + 1 + n);
+						cout << S[i].english;
+						gotoxy(x + 36, y + 1 + n);
+						cout << S[i].sum;
+						gotoxy(x + 42, y + 1 + n);
+						cout << S[i].aver;
+						gotoxy(x + 50, y + 1 + n);
+						cout << S[i].get_classrank();
+						gotoxy(x + 56, y + 1 + n);
+						cout << S[i].get_schoolrank();
+						n++;
+						find = 1;
+					}
+				}
+				else
+				{
+					n--;
 				}
 			}
 			if (find == 0)
@@ -221,7 +320,7 @@ void QueryStudentInfo(int id)
 				system("cls");
 				draw();
 				gotoxy(x + 18, y);
-				cout << "无该学号信息!";
+				cout << "无该学生信息!";
 				gotoxy(x + 28, y + 1);
 				system("pause");
 				TeacherSystem(id);
@@ -251,22 +350,37 @@ void QueryStudentInfo(int id)
 			cout << "总分";
 			gotoxy(x + 42, y);
 			cout << "平均分";
+			gotoxy(x + 50, y);
+			cout << "班排";
+			gotoxy(x + 56, y);
+			cout << "校排";
 			for (i = 0; i < StudentNumber; i++)
 			{
-				gotoxy(x-4, y+1+i);
-				cout << S[i].id;
-				gotoxy(x + 10, y+1+i);
-				cout << S[i].name;
-				gotoxy(x + 18, y+1+i);
-				cout << S[i].chinese;
-				gotoxy(x + 24, y+1+i);
-				cout << S[i].math;
-				gotoxy(x + 30, y+1+i);
-				cout << S[i].english;
-				gotoxy(x + 36, y+i+1);
-				cout << S[i].sum;
-				gotoxy(x + 42, y+1+i);
-				cout << S[i].aver;
+				if (T[id].get_classid() == S[i].classid)
+				{
+					gotoxy(x - 4, y + 1 + i);
+					cout << S[i].id;
+					gotoxy(x + 10, y + 1 + i);
+					cout << S[i].name;
+					gotoxy(x + 18, y + 1 + i);
+					cout << S[i].chinese;
+					gotoxy(x + 24, y + 1 + i);
+					cout << S[i].math;
+					gotoxy(x + 30, y + 1 + i);
+					cout << S[i].english;
+					gotoxy(x + 36, y + i + 1);
+					cout << S[i].sum;
+					gotoxy(x + 42, y + 1 + i);
+					cout << S[i].aver;
+					gotoxy(x + 50, y + 1 + i);
+					cout << S[i].get_classrank();
+					gotoxy(x + 56, y + 1 + i);
+					cout << S[i].get_schoolrank();
+				}
+				else
+				{
+					y--;
+				}
 			}
 			gotoxy(x + 30, y + 2 + i);
 			system("pause");
@@ -278,6 +392,212 @@ void QueryStudentInfo(int id)
 		system("pause");
 		QueryStudentInfo(id);
 	}
+}
+void QueryStudentInfo()
+{
+		int choice;
+		int i, find = 0;
+		int n = 0;
+		string tid;
+		string tname;
+		SortRank();
+		system("cls");
+		draw();
+		int x = 26, y = 8;
+		gotoxy(x, y);
+		cout << "1.根据学号查询学生成绩";
+		gotoxy(x, y + 3);
+		cout << "2.根据姓名查询学生成绩";
+		gotoxy(x, y + 6);
+		cout << "3.查询所有学生成绩";
+		gotoxy(x, y + 9);
+		cout << "0.退出";
+		gotoxy(x, y + 12);
+		cout << "请输入你的选择:";
+		cin >> choice;
+		switch (choice)
+		{
+		case 0:
+			ROOT();
+		case 1:
+			gotoxy(x, y + 14);
+			cout << "请输入你要查询的学号:";
+			cin >> tid;
+			for (i = 0; i < StudentNumber; i++)
+			{
+					system("cls");
+					draw();
+					gotoxy(x - 4, y);
+					cout << "学号";
+					gotoxy(x + 10, y);
+					cout << "姓名";
+					gotoxy(x + 18, y);
+					cout << "语文";
+					gotoxy(x + 24, y);
+					cout << "数学";
+					gotoxy(x + 30, y);
+					cout << "英语";
+					gotoxy(x + 36, y);
+					cout << "总分";
+					gotoxy(x + 42, y);
+					cout << "平均分";
+					gotoxy(x + 50, y);
+					cout << "校排"; 
+					gotoxy(x + 55, y);
+					cout << "班级";
+					gotoxy(x - 4, y + 1);
+					cout << S[i].id;
+					gotoxy(x + 10, y + 1);
+					cout << S[i].name;
+					gotoxy(x + 18, y + 1);
+					cout << S[i].chinese;
+					gotoxy(x + 24, y + 1);
+					cout << S[i].math;
+					gotoxy(x + 30, y + 1);
+					cout << S[i].english;
+					gotoxy(x + 36, y + 1);
+					cout << S[i].sum;
+					gotoxy(x + 42, y + 1);
+					cout << S[i].aver;
+					gotoxy(x + 50, y + 1);
+					cout << S[i].get_schoolrank();
+					gotoxy(x + 55, y + 1);
+					cout << S[i].classid;
+					gotoxy(x, y + 2);
+					system("pause");
+					ROOT();
+			
+			}
+			if (i == StudentNumber)
+			{
+				system("cls");
+				draw();
+				gotoxy(x + 18, y);
+				cout << "无该学号信息!";
+				gotoxy(x + 28, y + 1);
+				system("pause");
+				ROOT();
+			}
+		case 2:
+			gotoxy(x, y + 14);
+			cout << "请输入你要查询的姓名:";
+			cin >> tname;
+			system("cls");
+			draw();
+			for (i = 0; i < StudentNumber; i++)
+			{
+				if (tname == S[i].name)
+				{
+					gotoxy(x - 4, y);
+					cout << "学号";
+					gotoxy(x + 10, y);
+					cout << "姓名";
+					gotoxy(x + 18, y);
+					cout << "语文";
+					gotoxy(x + 24, y);
+					cout << "数学";
+					gotoxy(x + 30, y);
+					cout << "英语";
+					gotoxy(x + 36, y);
+					cout << "总分";
+					gotoxy(x + 42, y);
+					cout << "平均分";
+					gotoxy(x + 50, y);
+					cout << "校排";
+					gotoxy(x + 55, y);
+					cout << "班级";
+					gotoxy(x - 4, y + 1 + n);
+					cout << S[i].id;
+					gotoxy(x + 10, y + 1 + n);
+					cout << S[i].name;
+					gotoxy(x + 18, y + 1 + n);
+					cout << S[i].chinese;
+					gotoxy(x + 24, y + 1 + n);
+					cout << S[i].math;
+					gotoxy(x + 30, y + 1 + n);
+					cout << S[i].english;
+					gotoxy(x + 36, y + 1 + n);
+					cout << S[i].sum;
+					gotoxy(x + 42, y + 1 + n);
+					cout << S[i].aver;
+					gotoxy(x + 50, y + 1 + n);
+					cout << S[i].get_schoolrank();
+					gotoxy(x + 55, y + 1 + n);
+					cout << S[i].classid;
+					n++;
+					find = 1;
+				}
+			}
+			if (find == 0)
+			{
+				system("cls");
+				draw();
+				gotoxy(x + 18, y);
+				cout << "无该学生信息!";
+				gotoxy(x + 28, y + 1);
+				system("pause");
+				ROOT();
+			}
+			else
+			{
+				find = 0;
+				gotoxy(x, y + 1 + i);
+				system("pause");
+				ROOT();
+			}
+			break;
+		case 3:
+			system("cls");
+			draw();
+			gotoxy(x - 4, y);
+			cout << "学号";
+			gotoxy(x + 10, y);
+			cout << "姓名";
+			gotoxy(x + 18, y);
+			cout << "语文";
+			gotoxy(x + 24, y);
+			cout << "数学";
+			gotoxy(x + 30, y);
+			cout << "英语";
+			gotoxy(x + 36, y);
+			cout << "总分";
+			gotoxy(x + 42, y);
+			cout << "平均分";
+			gotoxy(x + 50, y);
+			cout << "校排";
+			gotoxy(x + 55, y);
+			cout << "班级";
+			for (i = 0; i < StudentNumber; i++)
+			{
+				gotoxy(x - 4, y + 1 + i);
+				cout << S[i].id;
+				gotoxy(x + 10, y + 1 + i);
+				cout << S[i].name;
+				gotoxy(x + 18, y + 1 + i);
+				cout << S[i].chinese;
+				gotoxy(x + 24, y + 1 + i);
+				cout << S[i].math;
+				gotoxy(x + 30, y + 1 + i);
+				cout << S[i].english;
+				gotoxy(x + 36, y + i + 1);
+				cout << S[i].sum;
+				gotoxy(x + 42, y + 1 + i);
+				cout << S[i].aver;
+				gotoxy(x + 50, y + 1 + i);
+				cout << S[i].get_schoolrank();
+				gotoxy(x + 55, y + 1 + i);
+				cout << S[i].classid;
+			}
+			gotoxy(x + 30, y + 2 + i);
+			system("pause");
+			system("cls");
+			ROOT();
+		default:
+			gotoxy(x, y + 14);
+			cout << "无该选项,请重新选择! ";
+			system("pause");
+			QueryStudentInfo();
+		}
 }
 void ModifyStudentInfo(int id)
 {
@@ -305,6 +625,8 @@ void ModifyStudentInfo(int id)
 	}
 	gotoxy(x - 10, y + 30);
 	system("pause");
+	SortRank();
+	SortRank(id);
 	WriteStudentInfo();
 	WriteImport();
 	TeacherSystem(id);
@@ -340,6 +662,8 @@ void DeleteStudentInfo(int id)
 	}
 	gotoxy(x - 10, y + 30);
 	system("pause");
+	SortRank();
+	SortRank(id);
 	WriteStudentInfo();
 	WriteImport();
 	TeacherSystem(id);
@@ -348,9 +672,9 @@ void DeleteStudentInfo(int id)
 //功能: 检查登录者权限,选择进入相应的系统
 void CheckPermission(int id) {
 	
-	if (T[id].id == 0)
+	if (id == -1)
 	{
-		//ROOT(); //进入总管理员系统
+		ROOT(); //进入总管理员系统
 	}
 	else
 	{
@@ -369,4 +693,3 @@ void WirteTeacherFIle()
 		out << T[i].id << " " << T[i].password << " " << T[i].name << " " << T[i].classid << "\n";
 	}
 }
-
