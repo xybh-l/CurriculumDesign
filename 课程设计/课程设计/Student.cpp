@@ -1,5 +1,8 @@
 #include "Student.h"
 #include "others.h"
+/*void Student::Show()
+{
+}*/
 
 extern Student S[100];
 void Student::add(Teacher t)

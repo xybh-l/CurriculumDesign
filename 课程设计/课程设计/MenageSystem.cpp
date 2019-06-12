@@ -124,8 +124,6 @@ void ROOT()
 		ROOT();
 	case 6:
 		QueryTeacherInfo();
-	case 7:
-		ModifyTeacherInfo();
 	case 8:
 		DeleteTeacherInfo();
 	case 0:
