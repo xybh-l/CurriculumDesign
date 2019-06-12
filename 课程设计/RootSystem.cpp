@@ -1,5 +1,6 @@
 #include "RootSystem.h"
 
+//功能: 添加教师信息
 void AddTeacherInfo(int num)
 {
 
@@ -37,6 +38,7 @@ void AddTeacherInfo(int num)
 	ROOT();
 }
 
+//功能: 查询教师信息
 void QueryTeacherInfo()
 {
 	system("cls");
@@ -64,6 +66,7 @@ void QueryTeacherInfo()
 	ROOT();
 }
 
+//功能: 删除教师信息
 void DeleteTeacherInfo()
 {
 	long tid;

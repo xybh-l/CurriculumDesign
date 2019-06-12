@@ -13,6 +13,8 @@ using std::vector;
 int TeacherNumber, StudentNumber;
 Student S[100];
 Teacher T[100];
+
+//功能: 定位函数(将光标定位至指定位置)
 void gotoxy(int, int); void gotoxy(int x, int y)
 {
 	CONSOLE_SCREEN_BUFFER_INFO csbiInfo;
@@ -24,6 +26,7 @@ void gotoxy(int, int); void gotoxy(int x, int y)
 	SetConsoleCursorPosition(hConsoleOut, csbiInfo.dwCursorPosition);
 }
 
+//功能: 绘制系统边框
 void draw()
 {
 	static int i = 0;
@@ -39,6 +42,7 @@ void draw()
 	cout << "***********************************************************************"<<endl;
 }
 
+//功能: 将学生信息写入文件(StudentInfo.txt)
 void WriteStudentInfo()
 {
 	const char * filename = "StudentInfo.txt";
@@ -50,6 +54,7 @@ void WriteStudentInfo()
 	out.close();
 }
 
+//功能: 读取系统重要参数(import.txt)
 void ReadImport()
 {
 	const char * filename = "import.txt";
@@ -64,6 +69,7 @@ void ReadImport()
 	cout << TeacherNumber << ends << StudentNumber << endl;
 }
 
+//功能: 将系统重要参数写入文件(import.txt)
 void WriteImport()
 {
 	ofstream out("import.txt", ios::out);
@@ -71,6 +77,7 @@ void WriteImport()
 	out.close();
 }
 
+//功能: 将学生成绩进行校内排序(不区分班级)
 void SortRank()
 {
 	sort(S, S + StudentNumber);
@@ -84,6 +91,7 @@ bool emp(Student &A, Student &B) {
 	return A.get_sum() > B.get_sum();
 }
 
+//功能: 将学生成绩进行班内排序(区分班级)
 void SortRank(int id)
 {
 	

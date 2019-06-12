@@ -2,6 +2,13 @@
 #include "others.h"
 
 extern Student S[100];
+
+/**
+*	Student类
+*	成员函数定义
+*	友元函数定义
+**/
+
 void Student::add(Teacher t)
 {
 	int x = 26, y = 8;

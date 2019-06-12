@@ -9,6 +9,7 @@ extern Student S[100];
 extern int StudentNumber;
 extern int TeacherNumber;
 
+//教师管理系统
 void TeacherSystem(int id) {
 	int num;
 	int x = 45, y = 6;
@@ -68,6 +69,7 @@ void TeacherSystem(int id) {
 		TeacherSystem(id);
 	}
 }
+//管理员系统
 void ROOT()
 {
 	int x = 45, y = 6;
@@ -136,6 +138,7 @@ void ROOT()
 		break;
 	}
 }
+//功能: 添加学生信息(教师系统)
 void AddStudentInfo(int id, int num)
 {
 	if (num <= 0)
@@ -158,6 +161,7 @@ void AddStudentInfo(int id, int num)
 	system("pause");
 
 }
+//功能: 添加学生信息(管理员系统)
 void AddStudentInfo(int num)
 {
 
@@ -180,10 +184,12 @@ void AddStudentInfo(int num)
 	system("pause");
 	ROOT();
 }
+//功能: 重载学生成绩比较运算符
 bool operator<(Student& l, Student& r)
 {
 	return l.sum > r.sum;
 }
+//功能: 查询学生成绩信息(教师系统)
 void QueryStudentInfo(int id)
 {
 	int choice;
@@ -412,6 +418,7 @@ void QueryStudentInfo(int id)
 		QueryStudentInfo(id);
 	}
 }
+//功能: 查询学生成绩信息(管理员系统)
 void QueryStudentInfo()
 {
 		int choice;
@@ -620,6 +627,7 @@ void QueryStudentInfo()
 			QueryStudentInfo();
 		}
 }
+//功能: 修改学生信息(教师系统)
 void ModifyStudentInfo(int id)
 {
 	string tid;
@@ -717,6 +725,7 @@ void ModifyStudentInfo(int id)
 	WriteImport();
 	TeacherSystem(id);
 }
+//功能: 修改学生信息(管理员系统)
 void ModifyStudentInfo()
 {
 	string tid;
@@ -813,6 +822,7 @@ void ModifyStudentInfo()
 	WriteImport();
 	ROOT();
 }
+//功能: 删除学生信息(教师系统)
 void DeleteStudentInfo(int id)
 {
 	string tid;
@@ -867,6 +877,7 @@ void CheckPermission(int id) {
 		
 }
 
+//功能: 将教师信息写入文件(TeacherInfo.txt)
 void WirteTeacherInfo()
 {
 	ofstream out("TeacherInfo.txt");
