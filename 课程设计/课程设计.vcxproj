@@ -126,7 +126,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="function.h" />
-    <ClInclude Include="Global.h" />
     <ClInclude Include="MenageSystem.h" />
     <ClInclude Include="others.h" />
     <ClInclude Include="RootSystem.h" />

@@ -44,6 +44,7 @@ public:
 	friend bool operator <(Student& l, Student& r);
 	friend void QueryStudentInfo(int id);
 	friend void QueryStudentInfo();
+	friend void DeleteStudentInfo();
 	friend void DeleteStudentInfo(int id);
 	friend void ModifyStudentInfo();
 	friend void ModifyStudentInfo(int id);

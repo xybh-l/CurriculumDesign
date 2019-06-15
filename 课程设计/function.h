@@ -5,7 +5,6 @@
 #include "Teacher.h"
 #include "MenageSystem.h"
 #include "StudentSystem.h"
-#include "Global.h"
 #include<iostream>
 #include<fstream>
 

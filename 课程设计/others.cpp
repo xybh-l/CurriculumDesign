@@ -1,5 +1,4 @@
 #include"others.h"
-#include "Global.h"
 #include<iostream>
 #include<fstream>
 
@@ -66,7 +65,6 @@ void ReadImport()
 	}
 	else
 		fscanf(read, "%d %d", &TeacherNumber, &StudentNumber);
-	cout << TeacherNumber << ends << StudentNumber << endl;
 }
 
 //功能: 将系统重要参数写入文件(import.txt)
@@ -94,7 +92,6 @@ bool emp(Student &A, Student &B) {
 //功能: 将学生成绩进行班内排序(区分班级)
 void SortRank(int id)
 {
-	
 	vector<Student> ClassStudent;
 	for (int i = 0; i < StudentNumber; i++)
 	{
@@ -118,4 +115,27 @@ void SortRank(int id)
 	}
 }
 
-
+void SortRank(Student& s)
+{
+	vector<Student> ClassStudent;
+	for (int i = 0; i < StudentNumber; i++)
+	{
+		if (S[i].get_classid() == s.get_classid())
+		{
+			ClassStudent.push_back(S[i]);
+		}
+	}
+	sort(ClassStudent.begin(), ClassStudent.end(), emp);
+	for (int i = 0; i < ClassStudent.size(); i++)
+	{
+		ClassStudent[i].set_classrank(i + 1);
+	}
+	for (int i = 0; i < StudentNumber; i++)
+	{
+		for (int j = 0; j < ClassStudent.size(); j++)
+		{
+			if (S[i].get_id() == ClassStudent[j].get_id())
+				S[i].set_classrank(ClassStudent[j].get_classrank());
+		}
+	}
+}

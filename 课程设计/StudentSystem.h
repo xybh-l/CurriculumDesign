@@ -7,3 +7,4 @@ using namespace std;
 void StudentSystem();
 void StudentChoice(int id);
 void QueryGrade(int id);
+void SetNewPassword(int id);

@@ -20,6 +20,8 @@ void TeacherSystem(int id) {
 	cout << "后台管理系统";
 	gotoxy(x + 6, y + 1);
 	cout << "欢迎你," << T[id].name << "老师!";
+	gotoxy(x + 6, y + 2);
+	cout << "权限:" << T[id].classid << "教师";
 	gotoxy(x - 5, y + 5);
 	cout << "1.添加本班学生成绩信息";
 	gotoxy(x - 5, y + 8);
@@ -69,6 +71,7 @@ void TeacherSystem(int id) {
 		TeacherSystem(id);
 	}
 }
+
 //管理员系统
 void ROOT()
 {
@@ -116,7 +119,7 @@ void ROOT()
 	case 3:
 		ModifyStudentInfo();
 	case 4:
-		//DeleteStudentInfo();
+		DeleteStudentInfo();
 	case 5:
 		gotoxy(x - 15, y + 26);
 		cout << "请输入添加教师的人数:";
@@ -128,6 +131,7 @@ void ROOT()
 		QueryTeacherInfo();
 	case 7:
 		ModifyTeacherInfo();
+		ROOT();
 	case 8:
 		DeleteTeacherInfo();
 	case 0:
@@ -138,6 +142,7 @@ void ROOT()
 		break;
 	}
 }
+
 //功能: 添加学生信息(教师系统)
 void AddStudentInfo(int id, int num)
 {
@@ -161,6 +166,7 @@ void AddStudentInfo(int id, int num)
 	system("pause");
 
 }
+
 //功能: 添加学生信息(管理员系统)
 void AddStudentInfo(int num)
 {
@@ -174,6 +180,7 @@ void AddStudentInfo(int num)
 	for (int i = StudentNumber; i < StudentNumber + num; i++)
 	{
 		S[i].add();
+		SortRank(S[i]);
 	}
 	gotoxy(26, 25);
 	StudentNumber += num;
@@ -184,11 +191,13 @@ void AddStudentInfo(int num)
 	system("pause");
 	ROOT();
 }
+
 //功能: 重载学生成绩比较运算符
 bool operator<(Student& l, Student& r)
 {
 	return l.sum > r.sum;
 }
+
 //功能: 查询学生成绩信息(教师系统)
 void QueryStudentInfo(int id)
 {
@@ -418,6 +427,7 @@ void QueryStudentInfo(int id)
 		QueryStudentInfo(id);
 	}
 }
+
 //功能: 查询学生成绩信息(管理员系统)
 void QueryStudentInfo()
 {
@@ -627,6 +637,7 @@ void QueryStudentInfo()
 			QueryStudentInfo();
 		}
 }
+
 //功能: 修改学生信息(教师系统)
 void ModifyStudentInfo(int id)
 {
@@ -725,6 +736,7 @@ void ModifyStudentInfo(int id)
 	WriteImport();
 	TeacherSystem(id);
 }
+
 //功能: 修改学生信息(管理员系统)
 void ModifyStudentInfo()
 {
@@ -768,30 +780,35 @@ void ModifyStudentInfo()
 				gotoxy(x, y + 22);
 				cout << "请输入学号:";
 				cin >> t_id;
+				gotoxy(x, y + 23);
 				S[i].set_id(t_id);
 				break;
 			case 2:
 				gotoxy(x, y + 22);
 				cout << "请输入姓名:";
 				cin >> t_name;
+				gotoxy(x, y + 23);
 				S[i].set_name(t_name);
 				break;
 			case 3:
 				gotoxy(x, y + 22);
 				cout << "请输入语文成绩:";
 				cin >> t_grade;
+				gotoxy(x, y + 23);
 				S[i].set_chinese(t_grade);
 				break;
 			case 4:
 				gotoxy(x, y + 22);
 				cout << "请输入数学成绩:";
 				cin >> t_grade;
+				gotoxy(x, y + 23);
 				S[i].set_math(t_grade);
 				break;
 			case 5:
 				gotoxy(x, y + 22);
 				cout << "请输入英语成绩:";
 				cin >> t_grade;
+				gotoxy(x, y + 23);
 				S[i].set_english(t_grade);
 				break;
 			case 6:
@@ -803,10 +820,50 @@ void ModifyStudentInfo()
 				cin.ignore(1024, '\n');
 				break;
 			}
-			gotoxy(x, y + 25);
+			gotoxy(x, y + 24);
 			cout << "修改成功!";
 			WriteStudentInfo();
 			find = 1;
+			SortRank(S[i]);
+			break;
+		}
+	}
+	if (find == 0)
+	{
+		gotoxy(x - 15, y + 28);
+		cout << "没有查询到该学号,请核对后,再进行操作。";
+	}
+	gotoxy(x - 10, y + 30);
+	system("pause");
+	SortRank();
+	SortRank();
+	WriteStudentInfo();
+	WriteImport();
+	ROOT();
+}
+
+void DeleteStudentInfo()
+{
+	string tid;
+	int find = 0;
+	int i = 0;
+	int x = 45, y = 6;
+	gotoxy(x - 15, y + 26);
+	cout << "请输入要删除的学生学号:";
+	cin >> tid;
+	for (i = 0; i < StudentNumber; i++)
+	{
+		if (tid == S[i].id)
+		{
+			for (int deleteid = i; deleteid < StudentNumber - 1; deleteid++)
+			{
+				swap(S[deleteid + 1], S[deleteid]);
+			}
+			gotoxy(x - 15, y + 28);
+			StudentNumber--;
+			cout << "删除成功!";
+			find = 1;
+			SortRank(S[i]);
 			break;
 		}
 	}
@@ -821,7 +878,9 @@ void ModifyStudentInfo()
 	WriteStudentInfo();
 	WriteImport();
 	ROOT();
+
 }
+
 //功能: 删除学生信息(教师系统)
 void DeleteStudentInfo(int id)
 {
@@ -861,6 +920,7 @@ void DeleteStudentInfo(int id)
 	TeacherSystem(id);
 	
 }
+
 //功能: 检查登录者权限,选择进入相应的系统
 void CheckPermission(int id) {
 	

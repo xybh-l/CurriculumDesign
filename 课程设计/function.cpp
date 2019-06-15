@@ -13,7 +13,6 @@ void Menu()
 		in >> S[i];
 	}
 	system("cls");
-	cout << TeacherNumber << ends << StudentNumber << endl;
 	int choice;
 	char x = 35, y = 10;
 	gotoxy(x, y);
@@ -21,7 +20,7 @@ void Menu()
 	gotoxy(x, y + 1);
 	cout << "*                                *" << endl;
 	gotoxy(x, y + 2);
-	cout << "*  欢迎使用学生成绩管理系统V0.1  *" << endl;
+	cout << "*  欢迎使用学生成绩管理系统V1.0  *" << endl;
 	gotoxy(x, y + 3);
 	cout << "*                                *" << endl;
 	gotoxy(x, y + 4);
@@ -35,8 +34,6 @@ void Menu()
 	cin >> choice;
 	Checkpwd(choice);
 }
-
-
 
 //功能: 读取教师信息
 void ReadTeacherFile()
@@ -54,7 +51,6 @@ void ReadTeacherFile()
 		for (int i = 0; i < TeacherNumber; i++)
 		{
 			in >> T[i].id >> T[i].password >> T[i].name >> T[i].classid;
-			T[i].Show();
 		}
 		in.close();
 		cout << "请输入教师工号:";

@@ -1,7 +1,6 @@
 #pragma once
 #pragma warning(disable:4996)
 
-#include"Global.h"
 #include"Student.h"
 #include<iostream>
 #include<conio.h>

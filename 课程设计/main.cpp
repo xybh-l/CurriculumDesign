@@ -9,6 +9,7 @@ extern int StudentNumber;
 
 int main(void)
 {
+	system("title 学生成绩管理系统");
 	system("mode con cols=110 lines=40");
 	//系统开始前,读取系统重要参数(教师数量,学生数量)
 	ReadImport();

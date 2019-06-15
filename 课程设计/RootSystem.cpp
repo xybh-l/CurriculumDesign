@@ -103,6 +103,7 @@ void DeleteTeacherInfo()
 	ROOT();
 }
 
+//功能: 修改教师信息
 void ModifyTeacherInfo()
 {
 	int choice;
@@ -111,7 +112,7 @@ void ModifyTeacherInfo()
 	int i;
 	int x = 45, y = 6;
 	gotoxy(x - 15, y + 26);
-	cout << "请输入要修改教师学号:";
+	cout << "请输入要修改教师工号:";
 	cin >> t_id;
 	for (i = 0; i < TeacherNumber; i++)
 	{
@@ -125,7 +126,7 @@ void ModifyTeacherInfo()
 			gotoxy(x, y+3);
 			cout << "2.修改教师执教班级";
 			gotoxy(x, y+6);
-			cout << "3.请输入你的选择:";
+			cout << "请输入你的选择:";
 			cin >> choice;
 			switch (choice)
 			{

@@ -94,6 +94,7 @@ void StudentChoice(int id)
 	}
 }
 
+//功能: 学生查询本人成绩
 void QueryGrade(int id)
 {
 	int x = 26, y = 3;
@@ -120,6 +121,7 @@ void QueryGrade(int id)
 	gotoxy(x+10, y + 33);
 }
 
+//功能: 设置新的密码
 void SetNewPassword(int id) {
 	string newpassword;
 	gotoxy(35, 18);
@@ -127,6 +129,8 @@ void SetNewPassword(int id) {
 	gotoxy(50, 18);
 	cin >> newpassword;
 	S[id].set_password(newpassword);
+	gotoxy(35, 18);
+	cout << "修改成功!                                   ";
 	WriteStudentInfo();
 	StudentChoice(id);
 }
